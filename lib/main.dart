@@ -1,45 +1,38 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/MainPages/HomeScreen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(title: Center(child: Text("Welcome"))),
-          body: Column(children: [
-            Center(
-              child: Container(
-                  width: 200,
-                  child: Center(
-                    child: TextField(
-                      decoration:
-                          const InputDecoration(labelText: "Username or Email"),
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Container(
-                  width: 200,
-                  child: Center(
-                    child: TextField(
-                      obscureText: true,
-                      decoration: const InputDecoration(labelText: "Password"),
-                    ),
-                  )),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(onPressed: () {}, child: Text("Login"))
-          ])),
-    );
+    return FutureBuilder(
+        // Initialize FlutterFire:
+
+        future: _initialization,
+        builder: (context, snapshot) {
+          // Check for errors
+
+          if (snapshot.hasError) {
+            return Container(
+              color: Colors.white,
+            );
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: HomeScreen(),
+                title: 'News App',
+                theme: ThemeData(primaryColor: Colors.red));
+          }
+          return Container();
+        });
   }
 }
