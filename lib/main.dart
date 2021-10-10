@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/MainPages/HomeScreen.dart';
+import 'package:myapp/MainPages/TabBar.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,17 +22,27 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasError) {
             return Container(
               color: Colors.white,
+              child: Center(child: CircularProgressIndicator()),
             );
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                home: HomeScreen(),
+                home: TabBarPage(),
                 title: 'News App',
-                theme: ThemeData(primaryColor: Colors.red));
+                theme: ThemeData(primaryColor: Colors.blue));
           }
-          return Container();
+          return Container(
+            color: Colors.white,
+            child: Center(
+                child: Column(
+              children: [
+                CircularProgressIndicator(),
+                Text("Something Went Wrong")
+              ],
+            )),
+          );
         });
   }
 }

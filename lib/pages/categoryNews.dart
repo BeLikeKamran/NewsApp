@@ -35,23 +35,12 @@ class _CategoryNewsState extends State<CategoryNews> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Flutter",
-                style: TextStyle(
-                    color: Colors.black87, fontWeight: FontWeight.w600),
-              ),
-              Text(
-                "News",
-                style:
-                    TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-              )
-            ],
+          toolbarHeight: 40,
+          title: Text(
+            widget.category,
+            style:
+                TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
           ),
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
         ),
         body: _loading
             ? Center(

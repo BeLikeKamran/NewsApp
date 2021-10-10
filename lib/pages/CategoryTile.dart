@@ -2,53 +2,62 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/pages/categoryNews.dart';
 
-
 class CategoryTile extends StatelessWidget {
   final String imageUrl, categoryName;
   CategoryTile({this.imageUrl, this.categoryName});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => CategoryNews(
-                      category: categoryName.toLowerCase(),
+                      category: categoryName.toUpperCase(),
                     )));
       },
-      child: Container(
-        margin: EdgeInsets.only(right: 16),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 60,
-                height: 120,
-                fit: BoxFit.cover,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Card(
+            margin: EdgeInsets.all(0),
+            elevation: 10,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 220,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(9),
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
               ),
             ),
-            Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                color: Colors.black26,
+          ),
+          Card(
+            margin: EdgeInsets.all(0),
+            elevation: 10,
+            child: Container(
+              width: MediaQuery.of(context).size.width - 80,
+              child: Center(
+                child: Text(
+                  categoryName,
+                  style: TextStyle(
+                      color: Colors.cyan,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-              width: 120,
-              height: 60,
-              child: Text(
-                categoryName,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500),
-              ),
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

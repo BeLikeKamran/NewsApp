@@ -16,22 +16,11 @@ class _ArticleViewState extends State<ArticleView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Flutter",
-              style:
-                  TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-            ),
-            Text(
-              "News",
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-            )
-          ],
+        toolbarHeight: 40,
+        title: Text(
+          widget.blogUrl,
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
         ),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
       ),
       body: Container(
           height: MediaQuery.of(context).size.height,
