@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/MainPages/TabBar.dart';
 import 'package:myapp/User/Login.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -177,8 +178,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 OutlinedButton.icon(
                                   icon: Icon(Icons.logout),
-                                  onPressed: () {
-                                    FirebaseAuth.instance.signOut();
+                                  onPressed: () async {
+                                    await FirebaseAuth.instance.signOut();
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (builder) =>
+                                                TabBarPage()));
                                   },
                                   label: Text("LogOut"),
                                   style: ButtonStyle(

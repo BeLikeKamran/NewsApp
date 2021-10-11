@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/MainPages/TabBar.dart';
 import 'package:myapp/User/Register.dart';
 
 class Login extends StatefulWidget {
@@ -28,7 +29,7 @@ class _LoginState extends State<Login> {
       ),
       content: Text("Enter Valid Email"),
     );
-    void login() async {
+    Future<void> login() async {
       FirebaseAuth auth = FirebaseAuth.instance;
       FirebaseFirestore db = FirebaseFirestore.instance;
       final String email = emailcontroller.text;
@@ -162,10 +163,12 @@ class _LoginState extends State<Login> {
                 ),
                 OutlinedButton.icon(
                   icon: Icon(Icons.login),
-                  onPressed: () {
+                  onPressed: () async {
                     if (formGlobalKey.currentState.validate()) {
                       formGlobalKey.currentState.save();
-                      login();
+                      await login();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (builder) => TabBarPage()));
                     }
                   },
                   label: Text("Login"),

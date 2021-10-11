@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/MainPages/TabBar.dart';
 
 class Register extends StatefulWidget {
   Register({Key key}) : super(key: key);
@@ -95,14 +96,11 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 10,
                   ),
-                  InkWell(
-                    onTap: () async {},
-                    child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage: NetworkImage(
-                          'https://i.pinimg.com/originals/d1/a6/2a/d1a62a6d8969170025f279115470e34b.jpg',
-                        )),
-                  ),
+                  CircleAvatar(
+                      radius: 70,
+                      backgroundImage: NetworkImage(
+                        'https://i.pinimg.com/originals/d1/a6/2a/d1a62a6d8969170025f279115470e34b.jpg',
+                      )),
                   SizedBox(
                     height: 20,
                   ),
@@ -119,7 +117,7 @@ class _RegisterState extends State<Register> {
                                   EdgeInsets.only(left: 2, right: 2, bottom: 8),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              color: Colors.white70,
+                              color: Colors.transparent,
                               child: Padding(
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: TextFormField(
@@ -136,7 +134,7 @@ class _RegisterState extends State<Register> {
                                       decoration: InputDecoration(
                                         icon: Icon(
                                           Icons.person,
-                                          color: Colors.blueGrey,
+                                          color: Colors.blueAccent,
                                           size: 25,
                                         ),
                                         hintText: 'Name',
@@ -151,7 +149,7 @@ class _RegisterState extends State<Register> {
                                   EdgeInsets.only(left: 2, right: 2, bottom: 8),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              color: Colors.white70,
+                              color: Colors.transparent,
                               child: Padding(
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: TextFormField(
@@ -168,7 +166,7 @@ class _RegisterState extends State<Register> {
                                       decoration: InputDecoration(
                                         icon: Icon(
                                           Icons.email,
-                                          color: Colors.blueGrey,
+                                          color: Colors.blueAccent,
                                           size: 25,
                                         ),
                                         hintText: 'Email or Phone number',
@@ -183,7 +181,7 @@ class _RegisterState extends State<Register> {
                                   EdgeInsets.only(left: 2, right: 2, bottom: 8),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              color: Colors.white70,
+                              color: Colors.transparent,
                               child: Padding(
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: TextFormField(
@@ -201,7 +199,7 @@ class _RegisterState extends State<Register> {
                                       decoration: InputDecoration(
                                         icon: Icon(
                                           Icons.security,
-                                          color: Colors.blueGrey,
+                                          color: Colors.blueAccent,
                                           size: 25,
                                         ),
                                         hintText: 'Password',
@@ -216,7 +214,7 @@ class _RegisterState extends State<Register> {
                                   EdgeInsets.only(left: 2, right: 2, bottom: 8),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25)),
-                              color: Colors.white70,
+                              color: Colors.transparent,
                               child: Padding(
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: TextFormField(
@@ -235,7 +233,7 @@ class _RegisterState extends State<Register> {
                                       decoration: InputDecoration(
                                         icon: Icon(
                                           Icons.security,
-                                          color: Colors.blueGrey,
+                                          color: Colors.blueAccent,
                                           size: 25,
                                         ),
                                         suffixIcon: Checkbox(
@@ -260,26 +258,29 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 5,
                   ),
-                  InkWell(
-                    onTap: () async {
+                  OutlinedButton.icon(
+                    icon: Icon(Icons.app_registration),
+                    onPressed: () async {
                       if (formGlobalKey.currentState.validate()) {
                         formGlobalKey.currentState.save();
                         await register();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (builder) => TabBarPage()));
                       }
                     },
-                    child: Card(
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 35,
-                        width: MediaQuery.of(context).size.width - 180,
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          "Submit",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                    label: Text("Register"),
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blueAccent),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
