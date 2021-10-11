@@ -26,6 +26,13 @@ class MyApp extends StatelessWidget {
             );
           }
 
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              color: Colors.white,
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+
           if (snapshot.connectionState == ConnectionState.done) {
             return MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -35,13 +42,7 @@ class MyApp extends StatelessWidget {
           }
           return Container(
             color: Colors.white,
-            child: Center(
-                child: Column(
-              children: [
-                CircularProgressIndicator(),
-                Text("Something Went Wrong")
-              ],
-            )),
+            child: Center(child: CircularProgressIndicator()),
           );
         });
   }
