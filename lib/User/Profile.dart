@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/MainPages/TabBar.dart';
 import 'package:myapp/User/Login.dart';
+import 'package:myapp/User/Premium.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key}) : super(key: key);
@@ -30,11 +31,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.only(top: 40),
               child: Column(
                 children: [
-                  CircleAvatar(
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (builder) => AlertDialog(
+                                title: Text("Attention"),
+                                content: Text(
+                                    "You need to upgrade to premium before uploading profile picture!"),
+                                actions: [
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    Premium()));
+                                      },
+                                      child: Text("Upgrade To Premium"))
+                                ],
+                              ));
+                    },
+                    child: CircleAvatar(
                       radius: 80,
+                      backgroundColor: Colors.white,
                       backgroundImage: NetworkImage(
-                        "https://i.pinimg.com/originals/d1/a6/2a/d1a62a6d8969170025f279115470e34b.jpg",
-                      )),
+                        "https://image.flaticon.com/icons/png/512/64/64572.png",
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: CircleAvatar(
+                              radius: 21,
+                              backgroundColor: Colors.white,
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundColor: Colors.black,
+                                child: Icon(
+                                  Icons.enhanced_encryption_rounded,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 15,
                   ),
@@ -143,8 +187,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             CircleAvatar(
                                 radius: 80,
+                                backgroundColor: Colors.white,
                                 backgroundImage: NetworkImage(
-                                  'https://i.pinimg.com/originals/d1/a6/2a/d1a62a6d8969170025f279115470e34b.jpg',
+                                  'https://image.flaticon.com/icons/png/512/64/64572.png',
                                 )),
                             SizedBox(
                               height: 15,
@@ -180,10 +225,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   icon: Icon(Icons.logout),
                                   onPressed: () async {
                                     await FirebaseAuth.instance.signOut();
-                                    Navigator.of(context).push(
+                                    Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
-                                            builder: (builder) =>
-                                                TabBarPage()));
+                                            builder: (builder) => TabBarPage()),
+                                        (route) => false);
                                   },
                                   label: Text("LogOut"),
                                   style: ButtonStyle(

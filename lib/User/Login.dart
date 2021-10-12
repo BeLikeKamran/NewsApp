@@ -167,8 +167,9 @@ class _LoginState extends State<Login> {
                     if (formGlobalKey.currentState.validate()) {
                       formGlobalKey.currentState.save();
                       await login();
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (builder) => TabBarPage()));
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (builder) => TabBarPage()),
+                          (route) => false);
                     }
                   },
                   label: Text("Login"),

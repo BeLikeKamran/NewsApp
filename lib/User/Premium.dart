@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class FavouriteScreen extends StatefulWidget {
+class Premium extends StatefulWidget {
+  const Premium({Key key}) : super(key: key);
+
   @override
-  _FavouriteScreenState createState() => _FavouriteScreenState();
+  _PremiumState createState() => _PremiumState();
 }
 
-class _FavouriteScreenState extends State<FavouriteScreen> {
+class _PremiumState extends State<Premium> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               height: 5,
             ),
             Text(
-              "Favourite news is not available",
+              "Premium service is not available",
               style: TextStyle(fontSize: 15),
             ),
           ],

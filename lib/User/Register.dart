@@ -264,8 +264,9 @@ class _RegisterState extends State<Register> {
                       if (formGlobalKey.currentState.validate()) {
                         formGlobalKey.currentState.save();
                         await register();
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (builder) => TabBarPage()));
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (builder) => TabBarPage()),
+                          (route) => false);
                       }
                     },
                     label: Text("Register"),
