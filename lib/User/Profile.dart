@@ -88,7 +88,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: MediaQuery.of(context).size.width - 50,
                         height: 40,
                         child: Center(
-                          child: Text("User",
+                          child: Text("User:",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         width: MediaQuery.of(context).size.width - 50,
                         height: 40,
                         child: Center(
-                          child: Text("Email",
+                          child: Text("Email:",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -158,7 +158,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CircularProgressIndicator(
-                            color: Colors.white,
                             strokeWidth: 4,
                           ),
                           SizedBox(
